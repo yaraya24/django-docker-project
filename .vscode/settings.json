@@ -1,0 +1,6 @@
+{
+    "python.pythonPath": "/home/yaraya24/.local/share/virtualenvs/books-4qXsa_gB/bin/python",
+    "python.linting.pylintEnabled": false,
+    "python.linting.pylamaEnabled": true,
+    "python.linting.enabled": true
+}
