@@ -157,8 +157,13 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
     'allauth.account.auth_backends.AuthenticationBackend',
 )
+# Settings for django-allauth
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' # outputs emails to the console instead of sending an actual email
 ACCOUNT_SESSION_REMEMBER = True # Remember me is always checked
 ACCOUNT_LOGOUT_ON_GET = True # removes intermediate signout page confirmation after loging out
 ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE=False
+ACCOUNT_USERNAME_REQUIRED=False # makes username not required
+ACCOUNT_AUTHENTICATION_METHOD='email' 
+ACCOUNT_EMAIL_REQUIRED=True
+ACCOUNT_UNIQUE_EMAIL=True
