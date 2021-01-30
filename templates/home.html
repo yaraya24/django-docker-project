@@ -1,8 +1,10 @@
 {% extends '_base.html' %}
+{% load static %}
 
 {% block title %}Homepage{% endblock title %}
 
 {% block content %}
+<h1> Homepage</h1>
 
 {% if user.is_authenticated %}
     Hi {{ user.email }}
@@ -12,4 +14,6 @@
     <a href="{% url 'login' %}">Log In</a>
     <a href="{% url 'signup' %}">Sign up</a>
 {% endif %}
+
+<img class="gorgc_image" src="{% static 'images/gorgc.jpg' %}"
 {% endblock content %}
