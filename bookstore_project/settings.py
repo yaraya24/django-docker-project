@@ -37,10 +37,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
 
     # Third Party Apps
 
     'crispy_forms',
+    'allauth',
+    'allauth.account',
     
     # Local
 
@@ -143,4 +146,19 @@ STATICFILES_FINDERS = [ # how to find static files
 AUTH_USER_MODEL = 'users.CustomUser'
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
+ACCOUNT_LOGOUT_REDIRECT = 'home' # part of django-allaut. it overrides the logout_redirect_url setting as per docs
 CRISPY_TEMPLATE_PACK ='bootstrap4'
+
+# django-allauth config
+SITE_ID = 1
+
+# extra settings to use django-allauth
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' # outputs emails to the console instead of sending an actual email
+ACCOUNT_SESSION_REMEMBER = True # Remember me is always checked
+ACCOUNT_LOGOUT_ON_GET = True # removes intermediate signout page confirmation after loging out
+ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE=False
