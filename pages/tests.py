@@ -2,7 +2,7 @@ from django.test import TestCase
 from django.test import SimpleTestCase
 from django.urls import reverse, resolve
 
-from .views import HomePageView
+from .views import HomePageView, AboutMePageView
 
 # Create your tests here.
 
@@ -32,4 +32,22 @@ class HomePageTests(SimpleTestCase):
         self.assertEqual(
             view.func.__name__,
             HomePageView.as_view().__name__
+        )
+
+class AboutMePageTests(SimpleTestCase):
+
+    def setUp(self):
+        url = reverse('about_me')
+        self.response = self.client.get(url)
+
+    def test_about_me_status_code(self):
+        self.assertEqual(self.response.status_code, 200)
+
+    def test_about_me_url_name(self):
+        self.assertTemplateUsed(self.response, 'about.html')
+
+    def test_aboutme_url_resolve_aboutme(self):
+        view = resolve('/about/')
+        self.assertEqual(
+            view.func.__name__, AboutMePageView.as_view().__name__
         )
