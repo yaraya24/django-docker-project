@@ -48,7 +48,8 @@ INSTALLED_APPS = [
     # Local
 
     'users.apps.UsersConfig',
-    'pages.apps.PagesConfig'
+    'pages.apps.PagesConfig',
+    'books.apps.BooksConfig',
 ]
 
 MIDDLEWARE = [
@@ -167,3 +168,4 @@ ACCOUNT_USERNAME_REQUIRED=False # makes username not required
 ACCOUNT_AUTHENTICATION_METHOD='email' 
 ACCOUNT_EMAIL_REQUIRED=True
 ACCOUNT_UNIQUE_EMAIL=True
+DEFAULT_FROM_EMAIL='admin@djangobookstore.com' # Where the all-auth emails come from

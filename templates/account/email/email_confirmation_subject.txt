@@ -1,0 +1,4 @@
+{% load i18n %}
+{% autoescape off %}
+{% blocktrans %}Did you just sign-up baby boy??{% endblocktrans %}
+{% endautoescape %}
