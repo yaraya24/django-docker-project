@@ -132,17 +132,22 @@ USE_L10N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
+# Static files (CSS, JavaScript, Images) & Media (uploads)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS=[os.path.join(BASE_DIR,'static'),] # directory for static files found locally (development)
 STATIC_ROOT = os.path.join(BASE_DIR,'staticfiles') # directory for production, django will do collate all the static files for speed
 
+
+
 STATICFILES_FINDERS = [ # how to find static files
     "django.contrib.staticfiles.finders.FileSystemFinder", # top to bottom, look first in STATICFLES_DIRS
     "django.contrib.staticfiles.finders.AppDirectoriesFinder", # look second within apps/static
 ]
+
+MEDIA_URL = '/media/' 
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media') # Absolute file system path to uploaded files (media)
 
 AUTH_USER_MODEL = 'users.CustomUser'
 LOGIN_REDIRECT_URL = 'home'
