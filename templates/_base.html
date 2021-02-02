@@ -17,6 +17,9 @@
       <a href="{% url 'home' %}" class="navbar-brand my-0 mr-md-auto
       font-weight-normal">Bookstore</a>
       <nav class="my-2 my-md-0 mr-md-3">
+        <form class="form-inline mt-2 mt-md-0" action="{% url 'search_results'%}" method='GET'>
+          <input name='q' class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+        </form>
         <a class="p-2 text-dark" href="{% url 'book_list' %}">Books</a>
         <a class="p-2 text-dark" href="{% url 'about_me' %}">About</a>
         {% if user.is_authenticated %}
