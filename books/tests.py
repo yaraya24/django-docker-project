@@ -1,4 +1,4 @@
-from django.test import TestCase
+from django.test import TestCase, Client
 from django.urls import reverse
 from django.contrib.auth import get_user_model
 
@@ -13,17 +13,20 @@ class BookTests(TestCase):
             price="25.00",
         )
 
-        self.user = get_user_model().objects.create_user(
+        self.user = get_user_model().objects.create_superuser(
             username = 'reviewer',
             email='reviewer@admin.com',
             password='testpassword123'
         )
+
+        
 
         self.review = Review.objects.create(
             book = self.book,
             author = self.user,
             review = "An excellent book."
         )
+        self.client.login(username='reviewer', password='testpassword123')
     
     def test_book_listing(self):
         self.assertEqual(self.book.title, 'Harry Potter')
@@ -32,6 +35,7 @@ class BookTests(TestCase):
 
     def test_book_list_view(self):
         response = self.client.get(reverse('book_list'))
+        
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, 'Harry Potter')
         self.assertTemplateUsed(response, 'books/book_list.html')
@@ -49,4 +53,12 @@ class BookTests(TestCase):
         self.assertContains(response, 'Harry Potter')
         self.assertTemplateUsed(response, 'books/book_detail.html')
         self.assertContains(response, f"An excellent book. by {self.user.username}")
+
+    def test_search_feature(self):
+        response = self.client.get(reverse('search_results'), data={'q':'Harry'})
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'books/search_results.html')
+        self.assertContains(response, 'Search')
+        self.assertContains(response, 'Rowling')
+        self.assertNotContains(response, 'Not found')
 
